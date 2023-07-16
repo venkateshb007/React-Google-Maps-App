@@ -14,8 +14,7 @@ This is a React web application that allows users to explore the hidden world an
 1. Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone [https://github.com/your-username/your-repo-name.git](https://github.com/venkateshb007/React-Google-Maps-App.git)
 
 1. Install the project dependencies:
     npm install
