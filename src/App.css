@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.google-maps-container{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.google-map {
+  width: 55%;
+  height: 500px;
+  margin-bottom: 10px;
+}
+
+.cuboid{
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cube {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background: linear-gradient(#3a3a46, #616082, #09000e);
+}
+
+
+.canvas-container:focus {
+  outline: none;
+}
+
+.cuboid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.capture-button {
+  width: 100%;
+  padding: 10px 0;
+  background-color: #514b9c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.capture-button:hover {
+  background-color: rgb(50, 50, 180);
+}
+
+.captured-images {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.captured-images img {
+  width: 180px;
+  height: auto;
+}
+
+.image-actions {
+  width: 180px;
+  display: flex;
+  justify-content: space-between;
+  bottom: 15px;
+}
+
+.image-actions button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.image-actions button:hover {
+  background-color: #009cf9;
+}
+
+
+@media (max-width: 820px) {
+  /* Styles for screens up to 768px width */
+  .google-maps-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .google-map {
+    width: 100%;
+  }
+  .cuboid {
+    width: 100%;
+    height: 500px;
+    justify-content: flex-start;
+  }
+ 
+}
+
+@media (max-width: 468px) {
+  /* Styles for screens up to 468px width */
+  .google-maps-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .google-map {
+    width: 100%;
+  }
+  .cuboid {
+    width: 100%;
+  }
+}

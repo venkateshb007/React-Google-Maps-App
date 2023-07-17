@@ -1,8 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
-import "../CustomAppStyles.css";
+import "../App.css";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
-import config from "./Config"; // Importing the Config file
-
+import {GOOGLE_MAPS_API_KEY} from "../config"
 import CustomBabylonMap from "./CustomBabylonMap";
 
 function CustomMap() {
@@ -13,19 +12,8 @@ function CustomMap() {
 
   const { isLoaded, loadError } = useLoadScript({
     id: "google-map-script",
-    googleMapsApiKey: config.googleMapsApiKey, // Using the imported googleMapsApiKey from Config
+    googleMapsApiKey: GOOGLE_MAPS_API_KEY,
   });
-
-  const handleViewImage = (imageUrl) => {
-    window.open(imageUrl, "_blank");
-  };
-
-  const handleRemoveImage = (imageId) => {
-    setCapturedImages((prevImages) => {
-      const updatedImages = prevImages.filter((image) => image.id !== imageId);
-      return updatedImages;
-    });
-  };
 
   const handleCaptureImage = () => {
     const mapContainer = mapContainerRef.current;
@@ -45,7 +33,7 @@ function CustomMap() {
     const zoom = mapContainer.getZoom();
 
     // Create a Google Static Maps URL with the center and zoom
-    const imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${center.lat()},${center.lng()}&zoom=${zoom}&size=800x600&key=${googleMapsApiKey}`;
+    const imageUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${center.lat()},${center.lng()}&zoom=${zoom}&size=800x600&key=${GOOGLE_MAPS_API_KEY}`;
 
     // Create a unique identifier for the captured image
     const imageId = Date.now();
@@ -72,9 +60,9 @@ function CustomMap() {
 
   return (
     <div className="container">
-      <div className="map-container">
+      <div className="google-maps-container">
         <GoogleMap
-          mapContainerClassName="map-content"
+          mapContainerClassName="google-map"
           center={center}
           zoom={5}
           options={{
@@ -85,6 +73,7 @@ function CustomMap() {
           }}
         ></GoogleMap>
 
+        
         <div className="cuboid">
           <div className="cube">
             <CustomBabylonMap
@@ -96,20 +85,6 @@ function CustomMap() {
             Capture Image
           </button>
         </div>
-      </div>
-
-      <div className="captured-images">
-        {capturedImages.map((image, index) => (
-          <div key={image.id} className="captured-image">
-            <img src={image.url} alt={`Captured ${index + 1}`} />
-            <div className="image-actions">
-              <button onClick={() => handleRemoveImage(image.id)}>
-                Cancel
-              </button>
-              <button onClick={() => handleViewImage(image.url)}>View</button>
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   );
