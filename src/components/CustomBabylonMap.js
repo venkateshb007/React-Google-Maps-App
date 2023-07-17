@@ -3,6 +3,8 @@ import { Engine, Scene } from "react-babylonjs";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
 import "../CustomAppStyles.css";
+import Config from "./Config"; // Updated import
+
 
 const CustomBabylonMap = ({ images }) => {
   const mapCanvasRef = useRef(null);

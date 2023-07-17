@@ -1,4 +1,3 @@
-
 import React from "react";
 import "./CustomAppStyles.css";
 import CustomMap from "./components/CustomMap";
@@ -13,4 +12,5 @@ function App() {
 }
 
 export default App;
+
 

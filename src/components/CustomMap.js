@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
 import "../CustomAppStyles.css";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
-import { googleMapsApiKey } from "../config.js";
+import config from "./Config"; // Importing the Config file
 
 import CustomBabylonMap from "./CustomBabylonMap";
 
@@ -13,7 +13,7 @@ function CustomMap() {
 
   const { isLoaded, loadError } = useLoadScript({
     id: "google-map-script",
-    googleMapsApiKey: googleMapsApiKey,
+    googleMapsApiKey: config.googleMapsApiKey, // Using the imported googleMapsApiKey from Config
   });
 
   const handleViewImage = (imageUrl) => {
