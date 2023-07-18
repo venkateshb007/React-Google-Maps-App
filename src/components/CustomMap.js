@@ -74,14 +74,14 @@ function CustomMap() {
         ></GoogleMap>
 
         
-        <div className="cuboid">
-          <div className="cube">
+        <div className="cuboid-Container">
+          <div className="cuboid">
             <CustomBabylonMap
               capturedImages={capturedImages}
               onImageCaptured={handleCaptureImage}
             />
           </div>
-          <button onClick={handleCaptureImage} className="capture-button">
+          <button onClick={handleCaptureImage} className="btn-capture">
             Capture Image
           </button>
         </div>
