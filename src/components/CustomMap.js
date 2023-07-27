@@ -1,14 +1,14 @@
 import React, { useMemo, useRef, useState } from "react";
 import "../App.css";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
-import {GOOGLE_MAPS_API_KEY} from "../config"
+import { GOOGLE_MAPS_API_KEY } from "../config";
 import CustomBabylonMap from "./CustomBabylonMap";
 
 function CustomMap() {
   const center = useMemo(() => ({ lat: 20, lng: 77 }), []);
 
   const mapContainerRef = useRef(null);
-  const [capturedImages, setCapturedImages] = useState([]);
+  const [capturedImages, setCapturedImages] = useState([]); // useState to manage capturedImages
 
   const { isLoaded, loadError } = useLoadScript({
     id: "google-map-script",
@@ -73,13 +73,9 @@ function CustomMap() {
           }}
         ></GoogleMap>
 
-        
         <div className="cuboid-Container">
           <div className="cuboid">
-            <CustomBabylonMap
-              capturedImages={capturedImages}
-              onImageCaptured={handleCaptureImage}
-            />
+            <CustomBabylonMap capturedImages={capturedImages} />
           </div>
           <button onClick={handleCaptureImage} className="btn-capture">
             Capture Image

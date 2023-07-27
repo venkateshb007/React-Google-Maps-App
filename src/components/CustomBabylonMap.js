@@ -1,20 +1,20 @@
+// CustomBabylonMap.js
 import React, { useEffect, useRef } from "react";
 import { Engine, Scene } from "react-babylonjs";
 import * as BABYLON from "babylonjs";
 import "babylonjs-loaders";
 import "../App.css";
 
-
-const CustomBabylonMap = ({ capturedImages, onImageCaptured }) => {
+const CustomBabylonMap = ({ capturedImages }) => {
   const canvasRef = useRef(null);
+  let engine = null;
+  let scene = null;
+  let box = null; //adding a variable to keep track of the cuboid
 
   useEffect(() => {
-    let engine = null;
-    let scene = null;
-
     const createScene = (textures) => {
       const newScene = new BABYLON.Scene(engine);
-      newScene.clearColor = new BABYLON.Color4(0, 0, 0, 0); // Set clearColor to transparent
+      newScene.clearColor = new BABYLON.Color4(0, 0, 0, 0);
 
       const camera = new BABYLON.ArcRotateCamera(
         "camera",
@@ -25,8 +25,8 @@ const CustomBabylonMap = ({ capturedImages, onImageCaptured }) => {
         newScene
       );
       camera.attachControl(canvasRef.current, true);
-      camera.wheelPrecision = 0; // Disable zooming with the mouse scroll
-      camera.lowerRadiusLimit = camera.upperRadiusLimit = camera.radius; // Keep the camera at a fixed radius
+      camera.wheelPrecision = 0;
+      camera.lowerRadiusLimit = camera.upperRadiusLimit = camera.radius;
 
       const light = new BABYLON.HemisphericLight(
         "light",
@@ -34,15 +34,21 @@ const CustomBabylonMap = ({ capturedImages, onImageCaptured }) => {
         newScene
       );
 
-      const box = BABYLON.MeshBuilder.CreateBox(
+      // Recreating the cuboid with the latest texture
+      if (box) {
+        box.dispose();
+      }
+      box = BABYLON.MeshBuilder.CreateBox(
         "box",
         { width: 4, height: 4, depth: 4 },
         newScene
       );
       const material = new BABYLON.StandardMaterial("material", newScene);
       if (textures.length > 0) {
-        // Use the latest captured image URL as the texture
-        material.diffuseTexture = new BABYLON.Texture(textures[textures.length - 1].url, newScene);
+        material.diffuseTexture = new BABYLON.Texture(
+          textures[textures.length - 1].url,
+          newScene
+        );
       }
       box.material = material;
 
@@ -51,17 +57,14 @@ const CustomBabylonMap = ({ capturedImages, onImageCaptured }) => {
 
     const initializeScene = () => {
       const canvas = canvasRef.current;
-      const width = 500; // Set the desired width for the canvas
+      const width = 500;
 
-      canvas.width = width; // Set the canvas width
+      canvas.width = width;
 
       engine = new BABYLON.Engine(canvas, true, {
         preserveDrawingBuffer: true,
         stencil: true,
       });
-      scene = createScene(capturedImages);
-
-      engine = new BABYLON.Engine(canvasRef.current, true);
       scene = createScene(capturedImages);
 
       engine.runRenderLoop(() => {
